@@ -1,0 +1,468 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import kivy kivy
+#:import win kivy.core.window
+
+
+
+ScreenManagement:
+        transition: FadeTransition()
+        MainScreen
+        PerfectTrade
+        Arbitrage
+        Robinhood
+        Sentiment
+        PullPortfolio
+        ScreenTwo
+   
+
+	
+	
+<AnimWidget@Widget>:
+        canvas:
+                Color:
+                        rgba: 0.7, 0.3, 0.9, 1
+                
+        size_hint: None, None
+    	size: 400, 30
+    	
+<MainScreen>:
+        name: "mainscreen"
+        BoxLayout:
+                orientation: 'horizontal'
+                size: (675, 500)
+				
+        BoxLayout:
+                orientation: 'vertical'
+                size_hint: [.25, 1]
+                rows: 6
+                spacing: '1dp'
+            
+                Button:
+                        text:'Arbitrage'
+                        bold: True
+                        on_press:app.root.current = "arbitrage"		
+                Button:
+                        text: 'Sentiment Analysis'
+                        bold: True
+                        on_press:app.root.current = "sentiment"	
+                Button:
+                        text:'Perfect Trade'
+                        bold: True
+                        on_press:app.root.current = "perfecttrade"
+                Button:
+                        text:'Robinhood Algorithm'
+                        bold: True
+                        on_press:app.root.current = "robinhood"
+                Button:
+                        text: 'Portfolio'
+                        bold: True
+                        on_press:app.root.current = "screen_one"
+         
+        BoxLayout:
+                size_hint: [.75, 1]
+                Label:
+                        text: "Click on one of the options"
+
+<PerfectTrade>:
+        name: "perfecttrade"
+        anim_box: anim_box
+        start_perfect_trade_button: start_perfect_trade_button
+        after_run_label: after_run_label
+        pre_run_label: pre_run_label
+        status: status
+        GridLayout:
+                cols: 1
+		
+                canvas:
+                        Color:
+                                rgba: 0.9, 0.9, 0.9, 1
+                        Rectangle:
+                                pos: self.pos
+                                size: self.size
+                Label:
+                        id: after_run_label
+                        font_size: 30
+                        color: 0.6, 0.6, 0.6, 1
+                        text_size: self.width, None
+                        halign: 'center'
+    
+                AnchorLayout:
+                        id: anim_box
+    
+                Label:
+                        id: pre_run_label
+                        font_size: 30
+                        color: 0.8, 0, 0, 1
+                        text: ''
+                Label:
+                        id: status
+                        font_size: 30
+                        color: 0, 0.8, 0, 1
+                        text: ''
+    			
+                Button:
+                        id: start_perfect_trade_button
+                        font_size: 20
+                        background_normal: ''
+                        background_color: 0, 1, 0, .55
+                        text: 'Start'
+                        on_press: root.run()
+                Button:
+                        id: quit_perfect_trade_button
+                        font_size: 20
+                        background_normal: ''
+                        background_color: 1, 0, 0, .55
+                        text: 'Quit'
+                        on_press: app.root.current = "mainscreen"
+			
+<Arbitrage>:
+        name: "arbitrage"
+        anim_box: anim_box
+        start_arbitrage_button: start_arbitrage_button
+        after_run_label: after_run_label
+        pre_run_label: pre_run_label
+        markettobuy: markettobuy
+        markettosell: markettosell
+        biddatasorted: biddatasorted
+        askdatasorted: askdatasorted
+        returnOutput: returnOutput
+        status: status
+        GridLayout:
+                cols: 1
+        		
+                canvas:
+                        Color:
+                                rgba: 0.9, 0.9, 0.9, 1
+                        Rectangle:
+                				pos: self.pos
+                				size: self.size
+                
+                Label:
+                        id: after_run_label
+                        font_size: 30
+                        color: 0.6, 0.6, 0.6, 1
+                        text_size: self.width, None
+                        halign: 'center'
+
+                AnchorLayout:
+                        id: anim_box
+
+                Label:
+                        id: pre_run_label
+                        font_size: 20
+                        color: 0.8, 0, 0, 1
+                        text: ''
+                Label:
+                        id: biddatasorted
+                        font_size: 20
+                        color: 0, 0.8, 0.8, 1
+                        text: ''
+                Label:
+                        id: askdatasorted
+                        font_size: 20
+                        color: 0, 0.8, 0.8, 1
+                        text: ''
+                Label:
+                        id: markettosell
+                        font_size: 20
+                        color: 0, 0.8, 0.8, 1
+                        text: ''
+                Label:
+                        id: markettobuy
+                        font_size: 20
+                        color: 0, 0.8, 0.8, 1
+                        text: ''
+                Label:
+                        id: returnOutput
+                        font_size: 15
+                        color: 0.8, 0.8, 0, 1
+                        text: ''
+                Label:
+                        id: status
+                        font_size: 30
+                        color: 0, 0.8, 0, 1
+                        text: ''
+                Button:
+                        id: start_arbitrage_button
+                        font_size: 20
+                        background_normal: ''
+                        background_color: 0, 1, 0, .55
+                        text: 'Start'
+                        on_press: root.run()
+                Button:
+                        id: quit_arbitrage_button
+                        font_size: 20
+                        background_normal: ''
+                        background_color: 1, 0, 0, .55
+                        text: 'Quit'
+                        on_press: app.root.current = "mainscreen"
+			
+<Robinhood>:
+        name: "robinhood"
+        start_robinhood_button: start_robinhood_button
+        quit_robinhood_button: quit_robinhood_button
+        status: status
+	
+        GridLayout:
+                cols: 1
+                size_hint: [1, .2]
+                canvas:
+                        Color:
+                                rgba: 0.9, 0.9, 0.9, 1
+                        Rectangle:
+                				pos: self.pos
+                				size: self.size
+        
+		
+                Label:
+                        id: status
+                        font_size: 30
+                        color: 0.8, 0, 0, 1
+                        text: 'Click "Start" to show image'
+    			
+                Button:
+                        id: start_robinhood_button
+                        font_size: 20
+                        background_normal: ''
+                        background_color: 0, 1, 0, .55
+                        text: 'Start'
+                        on_press: root.click()
+    			
+    			
+                Button:
+                        id: quit_robinhood_button
+                        font_size: 20
+                        background_normal: ''
+                        background_color: 1, 0, 0, .55
+                        text: 'Quit'
+                        on_press: app.root.current = "mainscreen"
+
+<Picture>:
+        name:"picture"
+        Image:
+                size: 800, 800 / self.image_ratio
+                top: root.top
+                id: filename
+                source: root.source
+			
+<Sentiment>:
+        name: "sentiment"
+        anim_box: anim_box
+        start_sentiment_button: start_sentiment_button
+        after_run_label: after_run_label
+        pre_run_label: pre_run_label
+        status: status
+        webscraper: webscraper
+            	
+        GridLayout:
+                cols: 1
+    		
+                canvas:
+                        Color:
+                                rgba: 0.9, 0.9, 0.9, 1
+                        Rectangle:
+                                pos: self.pos
+                                size: self.size
+                Label:
+                        id: after_run_label
+                        font_size: 30
+                        color: 0.6, 0.6, 0.6, 1
+                        text_size: self.width, None
+                        halign: 'center'
+    
+                AnchorLayout:
+                        id: anim_box
+    
+                Label:
+                        id: pre_run_label
+                        font_size: 30
+                        color: 0.8, 0, 0, 1
+                        text: ''
+                Label:
+                        id: status
+                        font_size: 30
+                        color: 0, 0.8, 0, 1
+                        text: ''
+                Label:
+                        id: webscraper
+                        font_size: 30
+                        color: 0.8, 0, 0, 1
+                        text: ''
+			
+                Button:
+                        id: start_sentiment_button
+                        font_size: 20
+                        background_normal: ''
+                        background_color: 0, 1, 0, .55
+                        text: 'Start'
+                        on_press: root.run()
+                Button:
+                        id: quit_sentiment_button
+                        font_size: 20
+                        background_normal: ''
+                        background_color: 1, 0, 0, .55
+                        text: 'Quit'
+                        on_press: app.root.current = "mainscreen"
+<PullPortfolio>:
+        name:"screen_one"
+        
+        display:coin
+        display_one:coin1
+        display_two:coin2
+        display_three:coin3
+        display_four:coin4
+        display_five:coin5
+        display_six:coin6
+        display_seven:coin7
+        display_eight:coin8
+               
+        display_total:total
+        id:portfolio
+    
+    
+   
+        Label:
+                id:coin
+                text: ''
+                background_color: 1, 0, 0, 1
+                pos_hint:{"x": -.35, "top": 1.4}
+            
+        Label:
+                id:coin1
+                text: ''
+                pos_hint:{"x": 0, "top": 1.4}
+        
+        Label:
+                id:coin2
+                text: ''
+                pos_hint:{"x": .35, "top": 1.4}
+            
+        Label:
+                id:coin3
+                text: ''
+                pos_hint:{"x": -.35, "top": 1.2}
+            
+        Label:
+                id:coin4
+                text: ''
+                pos_hint:{"x": 0, "top": 1.2}
+        
+        Label:
+                id:coin5
+                text: ''
+                pos_hint:{"x": .35, "top": 1.2}
+        
+        Label:
+                id:coin6
+                text: ''
+                pos_hint:{"x": -.35, "top": .9}
+            
+        Label:
+                id:coin7
+                text: ''
+                pos_hint:{"x": 0, "top": .9}
+        
+        Label:
+                id:coin8
+                text: ''
+                pos_hint:{"x": .35, "top": .9}
+        
+        Label:
+                id:coin9
+                text: ''
+                pos_hint:{"x": -.4, "top": 1.4}
+            
+        Label:
+                id:total
+                text: ''
+                pos_hint:{"x": 0, "top": .75}
+            
+        Button:
+                text: "Update Values"
+                size_hint: .33, .15
+                on_release: portfolio.run_portfolio_evaluation()
+                
+        Button:
+                text: "Return Home"
+                size_hint: .33, .15
+                pos_hint: {"right":.665, "bottom":0}
+                on_release: app.root.current="mainscreen"
+            
+            
+        Button:
+                text: "Change Screen"
+                size_hint: .33, .15
+                pos_hint: {"right": 1, "bottom": 0}
+                on_release: app.root.current="screen_two" 
+
+<ScreenTwo>:
+        name:"screen_two"
+        display_nine:coin9
+        display_ten:coin10
+        display_eleven:coin11
+        display_twelve:coin12
+        display_thirteen:coin13
+        display_fourteen:coin14
+        display_fifteen:coin15
+        display_sixteen:coin16
+        display_seventeen:coin17
+
+        id: display
+        
+        Label:
+                id:coin9
+                text: ''
+                pos_hint:{"x": -.35, "top": 1.4}
+            
+        Label:
+                id:coin10
+                text: ''
+                pos_hint:{"x": 0, "top": 1.4}
+        
+        Label:
+                id:coin11
+                text: ''
+                pos_hint:{"x": .35, "top": 1.4}
+            
+        Label:
+                id:coin12
+                text: ''
+                pos_hint:{"x": -.35, "top": 1.2}
+            
+        Label:
+                id:coin13
+                text: ''
+                pos_hint:{"x": 0, "top": 1.2}
+        
+        Label:
+                id:coin14
+                text: ''
+                pos_hint:{"x": .35, "top": 1.2}
+        
+        Label:
+                id:coin15
+                text: ''
+                pos_hint:{"x": -.35, "top": .9}
+            
+        Label:
+                id:coin16
+                text: ''
+                pos_hint:{"x": 0, "top": .9}
+        
+        Label:
+                id:coin17
+                text: ''
+                pos_hint:{"x": .35, "top": .9}
+            
+        Button:
+                text: "Update Display"
+                size_hint: .5, .15
+                pos_hint: {"right":.5, "bottom":0}
+                on_release:  display.run_portfolio_evaluation()
+        
+        Button:
+                text: "Change Screen"
+                size_hint: .5, .15
+                pos_hint: {"right": 1, "bottom": 0}
+                on_press: app.root.current="screen_one"
+			

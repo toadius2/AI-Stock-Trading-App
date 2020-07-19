@@ -1,0 +1,65 @@
+####get_data.py:
+  Main use is to get and format BTC price data
+ 
+  #####Functions:
+    print_chart(exchange, symbol, timeframe, from_datetime):
+        # function to get candle chart for time period
+        # returns dataframe
+
+        # PARAMS
+        # exchange - ccxt exchange object that determines which exchange to pull OHLCVS from
+        # symbol - string that represent symbol from respective exchange
+        # timeframe - string for intervals between each price
+        # from_datetime - when to begin price /ticker information
+
+    label_perfect_trades(priceHistory, triggerPrice, new_training=False):
+        # labels perfect trades as peaks , valleys or neutral
+
+        # params
+        # priceHistory - dataframe of OHLCVS
+        # triggerPrice - custom trigger price, if not starting from first index of priceHistory
+        # new_training - param to use first index of priceHistory as trigger or custom trigger Price (if False, uses custom triggerPrice)
+
+    formatAndSplit_data(data):
+        # formats data for time series analysis and splits into train and test set
+        # returns train_set, train_targets, test_set, test_targets, length of padding
+
+    batch_format(data, triggerPrice ,maxpad)
+        # similar to format and split but for new data and no train/test split
+        
+###lstm_model.py
+  Main use is to build lstm model
+  #####Functions:
+        plot_confusion_matrix(cm, classes, normalize=False,title='Confusion matrix', cmap=plt.cm.Blues):
+          # prints and plots the confusion matrix.Normalization can be applied by setting `normalize=True`.
+
+        val_loss_graph(model_history):
+          # prints val loss and train loss graph
+
+          #params
+          #model_history - model history of neural model
+
+        build_model(train_data, train_targets, all_targets_for_weight):
+          # used to build initial model
+          # saves best model
+          #returns model
+
+          #params
+          #training data and labels as well as all the labels for class_weight calculation
+
+          model_predict(test_data, test_targets, model)
+          #predicts against test case
+
+ ###main_script.py
+ 
+  (WIP)
+  Main use is to train on real time data
+  
+  #####Functions:
+        run_final_script(triggerPrice, starttime_ms):
+          # main method to load saved model and update iteratively with new data
+          # will print next prediction and if it was correct
+          
+          #pass trigger price from where last data ended
+          #starttime from last datapoint in ms
+          
