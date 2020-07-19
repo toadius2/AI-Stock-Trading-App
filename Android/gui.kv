@@ -1,0 +1,1277 @@
+#:import Factory kivy.factory.Factory
+WindowManager:
+	EmailBlock
+	MainWindow:
+	PaymentOptions:
+	PayByCrypto:
+	TermsofService:
+	DonationWindow:
+	CredentialCheckCrypto:
+	CredentialCheckForex:
+	CredentialCheckStock:
+    CurrLoginWindow:
+	RobinMFAScreen:
+    CryptoPortfolio:
+	ForexPortfolio:
+	RobinhoodPortfolio:
+
+<EmailBlock>:
+	name: 'email'
+	background_color: (82, 82, 122)
+	FloatLayout:
+		Label:
+			text:"Welcome"
+			size_hint:0.5, 0.05
+			pos_hint:{"x":.25, "top":0.85}
+			halign: 'center'
+			font_size:60
+		Label:
+		    text:"to"
+			size_hint:0.5, 0.05
+			pos_hint:{"x":.25, "top":0.80}
+			halign: 'center'
+			font_size:60
+		Label:
+		    text:"Next Capital Tech"
+			size_hint:0.5, 0.05
+			pos_hint:{"x":.26, "top":0.75}
+			halign: 'center'
+			font_size:60
+		Label:
+			text:"Enter email to proceed \n This email will be used \n only to notify updates: "
+			size_hint:0.5, 0.05
+			pos_hint:{"x":0, "top":0.45}
+			font_size: 40
+		TextInput:
+			id: emailInitial
+			multiline: False
+			size_hint: 0.4, 0.05
+			pos_hint:{"x":0.55, "top":0.45}
+			write_tab: False
+		Button:
+			text: "Confirm"
+			size_hint:0.50, 0.07
+			pos_hint:{"x":0.25, "top":.15}
+			on_release: root.handle_email()
+		Label:
+			id: emailValidity
+			text: ''
+			size_hint: .5, .05
+			pos_hint: {'x':.25, 'top':.23}
+			font_size: 40
+
+<MainWindow>:
+    name: "main"
+	background_color: (82, 82, 122)
+    FloatLayout:
+    	Image:
+			background_color: (1, 1, 1, 1)
+    		source:'white_logo_transparent.png'
+			allow_stretch: True
+    		size_hint:0.80, 0.40
+    		pos_hint:{"x":0.1, "top":1.00}
+		Label:
+			text:"Welcome"
+			size_hint:0.5, 0.05
+			pos_hint:{"x":.25, "top":0.58}
+			halign: 'center'
+			font_size:60
+		Label:
+		    text:"to"
+			size_hint:0.5, 0.05
+			pos_hint:{"x":.25, "top":0.53}
+			halign: 'center'
+			font_size:60
+		Label:
+		    text:"Next Capital Tech"
+			size_hint:0.5, 0.05
+			pos_hint:{"x":.26, "top":0.48}
+			halign: 'center'
+			font_size:60
+		Button:
+			text: "Sign In"
+			size_hint:0.50, 0.07
+			pos_hint:{"x":0.25, "top":.42}
+			on_release: app.root.current = 'second'
+		Button:
+			text: "Start/Stop Listening"
+			size_hint:0.50, 0.07
+			pos_hint:{"x":0.25, "top":.34}
+			on_release: root.start_listening()
+		Button:
+			text: "Payment Options"
+			size_hint:0.50, 0.07
+			pos_hint:{"x":0.25, "top":.26}
+			on_release: app.root.current = 'paymentOptions'
+		Button:
+			text: "Edit Credentials"
+			size_hint: .50, .07
+			pos_hint: {"x":.25, 'top':.18}
+			on_release: app.root.current = 'credsCrypto'
+		Button:
+			text: "Donation"
+			size_hint:0.50, 0.07
+			pos_hint:{"x":0.25, "top":.10}
+			on_release: app.root.current = 'donation'
+
+<PaymentOptions>:
+	name: 'paymentOptions'
+	FloatLayout:
+		Label:
+			text: 'Select Payment Option'
+			size_hint: .5, .1
+			pos_hint: {'x':.25, 'top':.85}
+			font_size: 60
+		Label:
+			text: 'Enter Discount Code: '
+			size_hint: .3, .05
+			pos_hint: {'x':.2, 'top':.75}
+			font_size: 30
+		TextInput:
+			id: discountCode
+			multiline: False
+			size_hint: 0.3, 0.05
+			pos_hint:{"x":0.50, "top":0.75}
+			write_tab: False
+		Label:
+			id: discountCodeValidity
+			text: ''
+			size_hint: .2, .05
+			pos_hint: {'x':.8, 'top':.75}
+			font_size: 30
+		Button:
+			text: 'Check discount code'
+			size_hint: .5, .07
+			pos_hint: {'x':.25, 'top':.65}
+			on_release: root.check_discount()
+		Button:
+			text: 'Pay by crypto'
+			size_hint: .5, .07
+			pos_hint:{'x':.25, 'top':.55}
+			on_release: root.change_to_crypto()
+		Button:
+			text: 'Pay by card'
+			size_hint: .5, .07
+			pos_hint:{'x':.25, 'top':.45}
+			on_release: root.pay()
+		Button:
+			text: 'Refresh Payment Status'
+			size_hint: .5, .07
+			pos_hint:{'x':.25, 'top':.35}
+			on_release: root.check()
+		Button:
+			text: 'Terms of Service'
+			size_hint: .5, .07
+			pos_hint: {'x':.25, 'top':.23}
+			on_release: app.root.current = 'tos'
+		Label:
+			text: ''
+			size_hint: .5, .05
+			pos_hint:{'x':.25, 'top':.15}
+			id: paymentStatus
+		Button:
+			text: 'Cancel'
+			size_hint: .5, .07
+			pos_hint:{'x':0, 'top':0.07}
+			on_release: app.root.current = 'main'
+
+<TermsofService>:
+	name: 'tos'
+	FloatLayout:
+		Button:
+			text: 'Agree'
+			size_hint: .3, .1
+			pos_hint:{'x':.6, 'top':0.15}
+			on_release: root.agreed()
+		Button:
+			text: 'Back'
+			size_hint: .3, .1
+			pos_hint:{'x':.1, 'top':0.15}
+			on_release: app.root.current = 'main'
+		ScrollView:
+			size_hint: 1, .8
+			pos_hint: {'x':0, 'top':1}
+			Label:
+				text: "Agreement & Acceptance Of Terms: Welcome to Next Capital Tech, our mission is to provide world-class services to you. Before you get started, we ask that you take a few minutes to carefully read the important terms and conditions below. Data Charges & License Fee AI trading Software - $2.99 per month for 3mb. Anything over 3mb attracts additional charges of $0.40 per mb. Trading profit fee for AI Trading Software is 20%, fees are based on profits gained since the last fee payment transaction. The Client hereby agrees that they understand and agree to all of the terms and conditions, in full and the following: The Client hereby agrees and understands that their account can lose all, or a substantial value or portion, of their account by investing in the Fund. The Client agrees to pay 20% of gains (see fees section). If profit is earned, this fee will be removed from the Client's account and reflected in financial reporting.  The Client reserves the right to stop using the product at any point while paying any final profit fees. The Client understands and agrees that any account profit is, by default, continued to be traded within the Client's account in the interest of compound interest. The Client reserves the right to withdraw funds at any point. The Client agrees that investing is 'highly risky' The Client agrees that they are paying for the Software License, which simply provides action signals to their account for them on an exchange that is not affiliated with the NCT. The Client understands that the NCT intends to cooperate fully with local, state, and federal law enforcement agencies. This includes reporting suspicious activity. The Client agrees that they will pay the proper taxes on their capital gains, along with following the applicable laws where they reside. The Client agrees that any legal proceedings will take place in the closest applicable courthouse to NCT's residence. (Currently Lindstrom, MN 55045 United States) The NCT reserves the right to terminate or deny service to anyone at any point, for any reason. Including seizure of account in criminal instances. NCT and the Client, by accepting the terms and conditions, agree to abide by the terms of this agreement and intend to be legally bound by it. PRIVACY YOUR USE OF WWW.NEXTCAPITALTECH.COM IS SUBJECT TO NEXT CAPITAL TECH'S PRIVACY POLICY. PLEASE REVIEW OUR PRIVACY POLICY, WHICH ALSO GOVERNS THE SITE AND INFORMS USERS OF OUR DATA COLLECTION PRACTICES. ELECTRONIC COMMUNICATIONS VISITING WWW.NEXTCAPITALTECH.COM OR SENDING EMAILS TO NEXT CAPITAL TECH CONSTITUTES ELECTRONIC COMMUNICATIONS. YOU CONSENT TO RECEIVE ELECTRONIC COMMUNICATIONS AND YOU AGREE THAT ALL AGREEMENTS, NOTICES, DISCLOSURES AND OTHER COMMUNICATIONS THAT WE PROVIDE TO YOU ELECTRONICALLY, VIA EMAIL AND ON THE SITE, SATISFY ANY LEGAL REQUIREMENT THAT SUCH COMMUNICATIONS BE IN WRITING. NO UNLAWFUL OR PROHIBITED USE/INTELLECTUAL PROPERTY YOU ARE GRANTED A NON-EXCLUSIVE, NON-TRANSFERABLE, REVOCABLE LICENSE TO ACCESS AND USE WWW.NEXTCAPITALTECH.COM STRICTLY IN ACCORDANCE WITH THESE TERMS OF USE. AS A CONDITION OF YOUR USE OF THE SITE, YOU WARRANT TO NEXT CAPITAL TECH LLC THAT YOU WILL NOT USE THE SITE FOR ANY PURPOSE THAT IS UNLAWFUL OR PROHIBITED BY THESE TERMS. YOU MAY NOT USE THE SITE IN ANY MANNER WHICH COULD DAMAGE, DISABLE, OVERBURDEN, OR IMPAIR THE SITE OR INTERFERE WITH ANY OTHER PARTY'S USE AND ENJOYMENT OF THE SITE. YOU MAY NOT OBTAIN OR ATTEMPT TO OBTAIN ANY MATERIALS OR INFORMATION THROUGH ANY MEANS NOT INTENTIONALLY MADE AVAILABLE OR PROVIDED FOR THROUGH THE SITE. ALL CONTENT INCLUDED AS PART OF THE SERVICE, SUCH AS TEXT, GRAPHICS, LOGOS, IMAGES, AS WELL AS THE COMPILATION THEREOF, AND ANY SOFTWARE USED ON THE SITE, IS THE PROPERTY OF NEXT CAPITAL TECH LLC OR ITS SUPPLIERS AND PROTECTED BY COPYRIGHT AND OTHER LAWS THAT PROTECT INTELLECTUAL PROPERTY AND PROPRIETARY RIGHTS. YOU AGREE TO OBSERVE AND ABIDE BY ALL COPYRIGHT AND OTHER PROPRIETARY NOTICES, LEGENDS OR OTHER RESTRICTIONS CONTAINED IN ANY SUCH CONTENT AND WILL NOT MAKE ANY CHANGES THERETO. YOU WILL NOT MODIFY, PUBLISH, TRANSMIT, REVERSE ENGINEER, PARTICIPATE IN THE TRANSFER OR SALE, CREATE DERIVATIVE WORKS, OR IN ANY WAY EXPLOIT ANY OF THE CONTENT, IN WHOLE OR IN PART, FOUND ON THE SITE. NEXT CAPITAL TECH LLC CONTENT IS NOT FOR RESALE. YOUR USE OF THE SITE DOES NOT ENTITLE YOU TO MAKE ANY UNAUTHORIZED USE OF ANY PROTECTED CONTENT, AND IN PARTICULAR, YOU WILL NOT DELETE OR ALTER ANY PROPRIETARY RIGHTS OR ATTRIBUTION NOTICES IN ANY CONTENT. YOU WILL USE PROTECTED CONTENT SOLELY FOR YOUR PERSONAL USE AND WILL MAKE NO OTHER USE OF THE CONTENT WITHOUT THE EXPRESS WRITTEN PERMISSION OF NEXT CAPITAL TECH LLC AND THE COPYRIGHT OWNER. YOU AGREE THAT YOU DO NOT ACQUIRE ANY OWNERSHIP RIGHTS IN ANY PROTECTED CONTENT. WE DO NOT GRANT YOU ANY LICENSES, EXPRESS OR IMPLIED, TO THE INTELLECTUAL PROPERTY OF NEXT CAPITAL TECH LLC OR OUR LICENSORS EXCEPT AS EXPRESSLY AUTHORIZED BY THESE TERMS. INTERNATIONAL USERS THE SERVICE IS CONTROLLED, OPERATED AND ADMINISTERED BY NEXT CAPITAL TECH FROM OUR OFFICES WITHIN THE USA. IF YOU ACCESS THE SERVICE FROM A LOCATION OUTSIDE THE USA, YOU ARE RESPONSIBLE FOR COMPLIANCE WITH ALL LOCAL LAWS. YOU AGREE THAT YOU WILL NOT USE THE NEXT CAPITAL TECH LLC CONTENT ACCESSED THROUGH WWW.NEXTCAPITALTECH.COM IN ANY COUNTRY OR IN ANY MANNER PROHIBITED BY ANY APPLICABLE LAWS, RESTRICTIONS OR REGULATIONS. INDEMNIFICATION YOU AGREE TO INDEMNIFY, DEFEND AND HOLD HARMLESS NEXT CAPITAL TECH LLC, ITS OFFICERS, DIRECTORS, EMPLOYEES, AGENTS AND THIRD PARTIES, FOR ANY LOSSES, COSTS, LIABILITIES, AND EXPENSES (INCLUDING REASONABLE ATTORNEY'S FEES) RELATING TO OR ARISING OUT OF YOUR USE OF OR INABILITY TO USE THE SITE OR SERVICES, ANY USER POSTINGS MADE BY YOU, YOUR VIOLATION OF ANY TERMS OF THIS AGREEMENT OR YOUR VIOLATION OF ANY RIGHTS OF A THIRD PARTY, OR YOUR VIOLATION OF ANY APPLICABLE LAWS, RULES OR REGULATIONS. NEXT CAPITAL TECH LLC RESERVES THE RIGHT, AT ITS OWN COST, TO ASSUME THE EXCLUSIVE DEFENSE AND CONTROL OF ANY MATTER OTHERWISE SUBJECT TO INDEMNIFICATION BY YOU, IN WHICH EVENT YOU WILL FULLY COOPERATE WITH NEXT CAPITAL TECH LLC IN ASSERTING ANY AVAILABLE DEFENSES. ARBITRATION IN THE EVENT THE PARTIES ARE NOT ABLE TO RESOLVE ANY DISPUTE BETWEEN THEM ARISING OUT OF OR CONCERNING THESE TERMS AND CONDITIONS, OR ANY PROVISIONS HEREOF, WHETHER IN CONTRACT, TORT, OR OTHERWISE AT LAW OR IN EQUITY FOR DAMAGES OR ANY OTHER RELIEF, THEN SUCH DISPUTE SHALL BE RESOLVED ONLY BY FINAL AND BINDING ARBITRATION PURSUANT TO THE FEDERAL ARBITRATION ACT, CONDUCTED BY A SINGLE NEUTRAL ARBITRATOR AND ADMINISTERED BY THE AMERICAN ARBITRATION ASSOCIATION, OR A SIMILAR ARBITRATION SERVICE SELECTED BY THE PARTIES, IN A LOCATION MUTUALLY AGREED UPON BY THE PARTIES. THE ARBITRATOR'S AWARD SHALL BE FINAL, AND JUDGMENT MAY BE ENTERED UPON IT IN ANY COURT HAVING JURISDICTION. IF ANY LEGAL OR EQUITABLE ACTION, PROCEEDING OR ARBITRATION ARISES OUT, OF OR CONCERNS THESE TERMS AND CONDITIONS, THE PREVAILING PARTY SHALL BE ENTITLED TO RECOVER ITS COSTS AND REASONABLE ATTORNEY'S FEES. THE PARTIES AGREE TO ARBITRATE ALL DISPUTES AND CLAIMS REGARDING THESE TERMS AND CONDITIONS OR ANY DISPUTES ARISING BECAUSE OF THESE TERMS AND CONDITIONS, WHETHER DIRECTLY OR INDIRECTLY, INCLUDING TORT CLAIMS THAT ARE A RESULT OF THESE TERMS AND CONDITIONS. THE PARTIES AGREE THAT THE FEDERAL ARBITRATION ACT GOVERNS THE INTERPRETATION AND ENFORCEMENT OF THIS PROVISION. THE ENTIRE DISPUTE, INCLUDING THE SCOPE AND ENFORCEABILITY OF THIS ARBITRATION PROVISION SHALL BE DETERMINED BY THE ARBITRATOR. THIS ARBITRATION PROVISION SHALL SURVIVE THE TERMINATION OF THESE TERMS AND CONDITIONS. CLASS ACTION WAIVER ANY ARBITRATION UNDER THESE TERMS AND CONDITIONS WILL TAKE PLACE ON AN INDIVIDUAL BASIS; CLASS ARBITRATION AND CLASS/REPRESENTATIVE/COLLECTIVE ACTIONS ARE NOT PERMITTED. THE PARTIES AGREE THAT A PARTY MAY BRING CLAIMS AGAINST THE OTHER ONLY IN EACH'S INDIVIDUAL CAPACITY, AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PUTATIVE CLASS, COLLECTIVE AND/ OR REPRESENTATIVE PROCEEDING, SUCH AS IN THE FORM OF A PRIVATE ATTORNEY GENERAL ACTION AGAINST THE OTHER. FURTHER, UNLESS BOTH YOU AND NEXT CAPITAL TECH LLC AGREE OTHERWISE, THE ARBITRATOR MAY NOT CONSOLIDATE MORE THAN ONE PERSON'S CLAIMS, AND MAY NOT OTHERWISE PRESIDE OVER ANY FORM OF A REPRESENTATIVE OR CLASS PROCEEDING. LIABILITY DISCLAIMER THE INFORMATION, SOFTWARE, PRODUCTS, AND SERVICES INCLUDED IN OR AVAILABLE THROUGH THE SITE MAY INCLUDE INACCURACIES OR TYPOGRAPHICAL ERRORS. CHANGES ARE PERIODICALLY ADDED TO THE INFORMATION HEREIN. NEXT CAPITAL TECH LLC AND/OR ITS SUPPLIERS MAY MAKE IMPROVEMENTS AND/OR CHANGES IN THE SITE AT ANY TIME. NEXT CAPITAL TECH LLC AND/OR ITS SUPPLIERS MAKE NO REPRESENTATIONS ABOUT THE SUITABILITY, RELIABILITY, AVAILABILITY, TIMELINESS, AND ACCURACY OF THE INFORMATION, SOFTWARE, PRODUCTS, SERVICES, AND RELATED GRAPHICS CONTAINED ON THE SITE FOR ANY PURPOSE. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, ALL SUCH INFORMATION, SOFTWARE, PRODUCTS, SERVICES, AND RELATED GRAPHICS ARE PROVIDED 'AS IS' WITHOUT WARRANTY OR CONDITION OF ANY KIND. NEXT CAPITAL TECH LLC AND/OR ITS SUPPLIERS HEREBY DISCLAIM ALL WARRANTIES AND CONDITIONS WITH REGARD TO THIS INFORMATION, SOFTWARE, PRODUCTS, SERVICES, AND RELATED GRAPHICS, INCLUDING ALL IMPLIED WARRANTIES OR CONDITIONS OF MERCHANTABILITY, FITNESS FOR A PURPOSE, TITLE AND NON INFRINGEMENT. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL NEXT CAPITAL TECH LLC AND/OR ITS SUPPLIERS BE LIABLE FOR ANY DIRECT, INDIRECT, PUNITIVE, INCIDENTAL, SPECIAL, CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF USE, DATA OR PROFITS, ARISING OUT OF OR IN ANY WAY CONNECTED WITH THE USE OR PERFORMANCE OF THE SITE, WITH THE DELAY OR INABILITY TO USE THE SITE OR RELATED SERVICES, THE PROVISION OF OR FAILURE TO PROVIDE SERVICES, OR FOR ANY INFORMATION, SOFTWARE, PRODUCTS, SERVICES, AND RELATED GRAPHICS OBTAINED THROUGH THE SITE, OR OTHERWISE ARISING OUT OF THE USE OF THE SITE, WHETHER BASED ON CONTRACT, TORT, NEGLIGENCE, STRICT LIABILITY OR OTHERWISE, EVEN IF NEXT CAPITAL TECH LLC OR ANY OF ITS SUPPLIERS HAS BEEN ADVISED OF THE POSSIBILITY OF DAMAGES. BECAUSE SOME STATES/JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF LIABILITY FOR CONSEQUENTIAL OR INCIDENTAL DAMAGES, THE ABOVE LIMITATION MAY NOT APPLY TO YOU. IF YOU ARE DISSATISFIED WITH ANY PORTION OF THE SITE, OR WITH ANY OF THESE TERMS OF USE, YOUR SOLE AND EXCLUSIVE REMEDY IS TO DISCONTINUE USING THE SITE. TERMINATION/ACCESS RESTRICTION NEXT CAPITAL TECH LLC RESERVES THE RIGHT, IN ITS SOLE DISCRETION, TO TERMINATE YOUR ACCESS TO THE SITE AND THE RELATED SERVICES OR ANY PORTION THEREOF AT ANY TIME, WITHOUT NOTICE. TO THE MAXIMUM EXTENT PERMITTED BY LAW, THIS AGREEMENT IS GOVERNED BY THE LAWS OF THE STATE OF MINNESOTA AND YOU HEREBY CONSENT TO THE EXCLUSIVE JURISDICTION AND VENUE OF COURTS IN MINNESOTA IN ALL DISPUTES ARISING OUT OF OR RELATING TO THE USE OF THE SITE. USE OF THE SITE IS UNAUTHORIZED IN ANY JURISDICTION THAT DOES NOT GIVE EFFECT TO ALL PROVISIONS OF THESE TERMS, INCLUDING, WITHOUT LIMITATION, THIS SECTION. YOU AGREE THAT NO JOINT VENTURE, PARTNERSHIP, EMPLOYMENT, OR AGENCY RELATIONSHIP EXISTS BETWEEN YOU AND NEXT CAPITAL TECH LLC BECAUSE OF THIS AGREEMENT OR USE OF THE SITE. NEXT CAPITAL TECH LLC'S PERFORMANCE OF THIS AGREEMENT IS SUBJECT TO EXISTING LAWS AND LEGAL PROCESS AND NOTHING CONTAINED IN THIS AGREEMENT IS IN DEROGATION OF NEXT CAPITAL TECH's RIGHT TO COMPLY WITH GOVERNMENTAL, COURT AND LAW ENFORCEMENT REQUESTS OR REQUIREMENTS RELATING TO YOUR USE OF THE SITE OR INFORMATION PROVIDED TO OR GATHERED BY NEXT CAPITAL TECH LLC WITH RESPECT TO SUCH USE. IF ANY PART OF THIS AGREEMENT IS DETERMINED TO BE INVALID OR UNENFORCEABLE PURSUANT TO APPLICABLE LAW INCLUDING, BUT NOT LIMITED TO, THE WARRANTY DISCLAIMERS AND LIABILITY LIMITATIONS SET FORTH ABOVE, THEN THE INVALID OR UNENFORCEABLE PROVISION WILL BE DEEMED SUPERSEDED BY A VALID, ENFORCEABLE PROVISION THAT MOST CLOSELY MATCHES THE INTENT OF THE ORIGINAL PROVISION AND THE REMAINDER OF THE AGREEMENT SHALL CONTINUE IN EFFECT. UNLESS OTHERWISE SPECIFIED HEREIN, THIS AGREEMENT CONSTITUTES THE ENTIRE AGREEMENT BETWEEN THE USER AND NEXT CAPITAL TECH LLC WITH RESPECT TO THE SITE AND IT SUPERSEDES ALL PRIOR OR CONTEMPORANEOUS COMMUNICATIONS AND PROPOSALS, WHETHER ELECTRONIC, ORAL OR WRITTEN, BETWEEN THE USER AND NEXT CAPITAL TECH LLC WITH RESPECT TO THE SITE. A PRINTED VERSION OF THIS AGREEMENT AND OF ANY NOTICE GIVEN IN ELECTRONIC FORM SHALL BE ADMISSIBLE IN JUDICIAL OR ADMINISTRATIVE PROCEEDINGS BASED UPON OR RELATING TO THIS AGREEMENT TO THE SAME EXTENT AND SUBJECT TO THE SAME CONDITIONS AS OTHER BUSINESS DOCUMENTS AND RECORDS ORIGINALLY GENERATED AND MAINTAINED IN PRINTED FORM. IT IS THE EXPRESS WISH TO THE PARTIES THAT THIS AGREEMENT AND ALL RELATED DOCUMENTS BE WRITTEN IN ENGLISH. CHANGES TO TERMS NEXT CAPITAL TECH LLC RESERVES THE RIGHT, IN ITS SOLE DISCRETION, TO CHANGE THE TERMS UNDER WHICH NCT's PRODUCTS ARE OFFERED. THE MOST CURRENT VERSION OF THE TERMS WILL SUPERSEDE ALL PREVIOUS VERSIONS. NEXT CAPITAL TECH LLC ENCOURAGES YOU TO PERIODICALLY REVIEW THE TERMS TO STAY INFORMED OF OUR UPDATES. CONTACT US NEXT CAPITAL TECH LLC WELCOMES YOUR QUESTIONS OR COMMENTS REGARDING THE TERMS: NEXT CAPITAL TECH LLC 26792 OLYMPIC TRAIL LINDSTROM, MINNESOTA 55045 EFFECTIVE AS OF JUNE 4th, 2019 NEXT CAPITAL TECH LLC Manager, Noah Nelson"
+				id: terms
+				font_size: 30
+				size_hint_y: None
+				height: self.texture_size[1]
+				text_size: self.width, None
+
+<PayByCrypto>:
+	name: 'payCrypto'
+	FloatLayout:
+		Label:
+			text: 'Pay by Cryptocurrency'
+			size_hint: .5, .1
+			pos_hint: {'x':.25, 'top':.8}
+			font_size: 60
+		Label:
+			text: 'Enter email: '
+			size_hint:0.4, 0.05
+			pos_hint:{"x":0, "top":0.60}
+			font_size: 40
+		TextInput:
+			id: coinEmail
+			multiline: False
+			size_hint: 0.5, 0.05
+			pos_hint:{"x":0.50, "top":0.60}
+			write_tab: False
+		Label:
+			text: 'Choose currency: '
+			size_hint:0.4, 0.05
+			pos_hint:{"x":0, "top":0.50}
+			font_size: 40
+		Spinner:
+			id: currency
+			text: "Choose Currency"
+			size_hint: .5, .05
+			pos_hint: {"x": 0.5, "top": 0.50}
+			values: ['BTC', 'LTC', 'BCH', 'BNB', 'BSV', 'DASH', 'EOS', 'ETC', 'ETH', 'QTUM', 'RVN', 'TRX', 'TUSD', 'USDC', 'USDT', 'WAVES', 'XEM', 'XMR', 'XVG', 'ZEC', 'LTCT']
+			on_text: root.currency_select(self.text)
+		Button:
+			text: 'Confirm'
+			size_hint: .5, .05
+			pos_hint:{'x':.25, 'top':.40}
+			on_release: root.create_transaction()
+		Label:
+			text: 'Wallet Address: '
+			size_hint:0.5, 0.05
+			pos_hint:{"x":0, "top":0.30}
+			font_size: 40
+		Label:
+			text: ''
+			id: address
+			size_hint:0.5, 0.05
+			pos_hint:{"x":0.5, "top":0.30}
+			font_size: 25
+		Label:
+			text: 'Amount required: '
+			size_hint:0.5, 0.05
+			pos_hint:{"x":0, "top":0.20}
+			font_size: 40
+		Label:
+			text: ''
+			id: amount
+			size_hint:0.5, 0.05
+			pos_hint:{"x":0.5, "top":0.20}
+			font_size: 40
+		Button:
+			text: 'Cancel'
+			size_hint: .5, .05
+			pos_hint:{'x':0, 'top':.05}
+			on_release: app.root.current = 'main'
+
+<CredentialCheckCrypto>:
+	name: "credsCrypto"
+	FloatLayout:
+		Label:
+			text:"Crypto Credentials"
+			size_hint:0.5, 0.05
+			pos_hint:{"x":.25, "top":0.80}
+			font_size: 60
+		Label:
+			text:"Enter API Key:"
+			size_hint:0.4, 0.05
+			pos_hint:{"x":.05, "top":0.67}
+			font_size: 40
+		TextInput:
+			id: CrChAPIKey
+			multiline: False
+			size_hint: 0.4, 0.05
+			pos_hint:{"x":0.50, "top":0.67}
+			write_tab: False
+		Label:
+			text:"Enter secret key:"
+			size_hint:0.4, 0.05
+			pos_hint:{"x":0.05, "top":0.60}
+			font_size: 40
+		TextInput:
+			id: CrChSecretKey
+			multiline: False
+			size_hint: 0.4, 0.05
+			pos_hint:{"x":0.50, "top":0.60}
+			write_tab: False
+		Label:
+			text:"Choose Exchange:"
+			size_hint:0.4, 0.05
+			pos_hint:{"x":0.05, "top":0.53}
+			font_size: 40
+		Spinner:
+			id: exchange
+			text: "Exchange"
+			size_hint: .4, .05
+			pos_hint: {"x": .50, "top": .53}
+			values: ['_1btcxe', 'acx', 'adara', 'allcoin', 'anxpro', 'bcex', 'bequant', 'bibox', 'bigone', 'binance', 'binanceje', 'binance.us', 'bit2c', 'bitbank', 'bitbay', 'bitfinex', 'bitfinex2', 'bitflyer', 'bitforex', 'bithumb', 'bitkk', 'bitlish', 'bitmart', 'bitmax', 'bitmex', 'bitso', 'bitstamp', 'bitstamp1', 'bittrex', 'bitz', 'bl3p', 'bleutrade', 'braziliex', 'btcalpha', 'btcbox', 'btcchina', 'btcmarkets', 'btctradeim', 'btctradeua', 'btcturk', 'buda', 'bytetrade', 'cex', 'chilebit', 'cobinhood', 'coinbase', 'coinbaseprime', 'coinbasepro', 'coincheck', 'coinegg', 'coinex', 'coinexchange', 'coinfalcon', 'coinfloor', 'coingi', 'coinmarketcap', 'coinmate', 'coinone', 'coinspot', 'cointiger', 'coolcoin', 'coss', 'crex24', 'deribit', 'digifinex', 'dsx', 'dx', 'exmo', 'exx', 'fcoin', 'fcoinjp', 'flowbtc', 'foxbit', 'ftx', 'fybse', 'gateio', 'gemini', 'hitbtc', 'hitbtc2', 'huobipro', 'huobiru', 'ice3x', 'idex', 'independentreserve', 'indodax', 'itbit', 'kkex', 'kraken', 'kucoin', 'kuna', 'lakebtc', 'latoken', 'lbank', 'liquid', 'livecoin', 'luno', 'lykke', 'mandala', 'mercado', 'mixcoins', 'negociecoins', 'oceanex', 'okcoincny', 'okcoinusd', 'okex', 'okex3', 'paymium', 'poloniex', 'rightbtc', 'southxchange', 'stronghold', 'surbitcoin', 'theocean', 'therock', 'tidebit', 'tidex', 'upbit', 'vaultoro', 'vbtc', 'virwox', 'whitebit', 'xbtce', 'yobit', 'zaif', 'zb']
+			on_text:
+				root.on_spinner_select_exchange(self.text)
+		Button:
+			text: "Confirm"
+			size_hint:0.29, 0.1
+			pos_hint:{"x":0.2, "top":.40}
+			on_release: root.handle_crypto_choice()
+		Button:
+			text: "Add Another"
+			size_hint:0.28, 0.1
+			pos_hint:{"x":0.51, "top":.40}
+			on_release: root.add()
+		Button:
+			text: 'Cancel'
+			size_hint:0.30, 0.05
+			pos_hint:{"x":0, "top":.05}
+			on_release: app.root.current = 'main'
+		Button:
+			text: 'Forex'
+			size_hint:0.30, 0.05
+			pos_hint:{"x":0.70, "top":.05}
+			on_release: app.root.current = 'credsForex'
+		Button:
+			text: 'Stocks'
+			size_hint:0.30, 0.05
+			pos_hint:{"x":0.35, "top":.05}
+			on_release: app.root.current = 'credsRobin'
+
+<CredentialCheckForex>:
+	name: "credsForex"
+	FloatLayout:
+		Label:
+			text:"Forex Credentials"
+			size_hint:0.5, 0.05
+			pos_hint:{"x":.25, "top":0.80}
+			font_size: 60
+		Label:
+			text:"Enter Username:"
+			size_hint:0.4, 0.05
+			pos_hint:{"x":0.05, "top":0.67}
+			font_size: 40
+		TextInput:
+			id: CrChUname
+			multiline: False
+			size_hint: 0.4, 0.05
+			pos_hint:{"x":0.50, "top":0.67}
+			write_tab: False
+		Label:
+			text:"Enter password:"
+			size_hint:0.4, 0.05
+			pos_hint:{"x":0.05, "top":0.60}
+			font_size: 40
+		TextInput:
+			id: CrChPassw
+			multiline: False
+			size_hint: 0.4, 0.05
+			pos_hint:{"x":0.50, "top":0.60}
+			write_tab: False
+		Label:
+			text:"Enter appkey:"
+			size_hint:0.4, 0.05
+			pos_hint:{"x":0.05, "top":0.53}
+			font_size: 40
+		TextInput:
+			id: CrChAppkey
+			multiline: False
+			size_hint: 0.4, 0.05
+			pos_hint:{"x":0.50, "top":0.53}
+			write_tab: False
+		Button:
+			text: "Confirm"
+			size_hint:0.30, 0.1
+			pos_hint:{"x":0.35, "top":.23}
+			on_release: root.write_file()
+		Button:
+			text: 'Crypto'
+			size_hint:0.30, 0.05
+			pos_hint:{"x":0.7, "top":.05}
+			on_release: app.root.current = 'credsCrypto'
+		Button:
+			text: 'Cancel'
+			size_hint:0.30, 0.05
+			pos_hint:{"x":0, "top":.05}
+			on_release: app.root.current = 'main'
+		Button:
+			text: 'Stocks'
+			size_hint:0.30, 0.05
+			pos_hint:{"x":.35, "top":.05}
+			on_release: app.root.current = 'credsRobin'
+
+<CredentialCheckStock>:
+	name: "credsRobin"
+	FloatLayout:
+		Label:
+			text:"Exchange Credentials"
+			size_hint:0.5, 0.05
+			pos_hint:{"x":.25, "top":0.85}
+			font_size: 60
+		Label:
+			text:"Enter Username:"
+			size_hint:0.4, 0.05
+			pos_hint:{"x":0.05, "top":0.77}
+			font_size: 40
+		TextInput:
+			id: CrChStockName
+			multiline: False
+			size_hint: 0.4, 0.05
+			pos_hint:{"x":0.50, "top":0.77}
+			write_tab: False
+		Label:
+			text:"Enter password:"
+			size_hint:0.4, 0.05
+			pos_hint:{"x":0.05, "top":0.70}
+			font_size: 40
+		TextInput:
+			id: CrChStockPassw
+			multiline: False
+			size_hint: 0.4, 0.05
+			pos_hint:{"x":0.50, "top":0.70}
+			write_tab: False
+		Label:
+			text:"Choose Exchange:"
+			size_hint:0.4, 0.05
+			pos_hint:{"x":0.05, "top":0.63}
+			font_size: 40
+		Spinner:
+			id: StockExchange
+			text: "Exchange"
+			size_hint: .4, .05
+			pos_hint: {"x": .50, "top": .63}
+			values: ['Robinhood']
+			on_text:
+				root.on_spinner_select_exchange(self.text)
+		Button:
+			text: "Add Another"
+			size_hint:0.28, 0.1
+			pos_hint:{"x":0.51, "top":.40}
+			on_release: root.add()
+		Button:
+			text: "Confirm"
+			size_hint:0.28, 0.1
+			pos_hint:{"x":0.2, "top":.40}
+			on_release: root.write_file()
+		Button:
+			text: 'Cancel'
+			size_hint:0.30, 0.05
+			pos_hint:{"x":0, "top":.05}
+			on_release: app.root.current = 'main'
+		Button:
+			text: 'Crypto'
+			size_hint:0.30, 0.05
+			pos_hint:{"x":.35, "top":.05}
+			on_release: app.root.current = 'credsCrypto'
+		Button:
+			text: 'Forex'
+			size_hint:0.30, 0.05
+			pos_hint:{"x":.7, "top":.05}
+			on_release: app.root.current = 'credsForex'
+
+<DonationWindow>:
+    name: "donation"
+    FloatLayout:
+		Label:
+			text: "Donation"
+		    bold: True
+		    size_hint: 0.10, 0.10
+		    pos_hint: {"x":.45, "top": .98}
+		    font_size: 60
+        Label:
+            bold: True
+            text: "Next Capital Tech will match your donation\n to the cause and country of your choice"
+            size_hint: 0.05, 0.05
+            pos_hint: {"x":0.5, "top": .85}
+			# text_size = root.width, None
+            font_size: 50
+        Label:
+            text: "Select Country:"
+            size_hint: 0.15, 0.05
+            pos_hint: {"x":0.25, "top": 0.65}
+            font_size: 40
+        Spinner:
+			id: country
+			text: "Choose Country"
+			size_hint: .4, .05
+			pos_hint: {"x": 0.5, "top": 0.65}
+			values: ['Afghanistan', 'Akrotiri', 'Albania', 'Algeria', 'American Samoa', 'Andorra', 'Angola', 'Anguilla', 'Antarctica', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Ashmore and Cartier Islands', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Bassas da India', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Bouvet Island', 'Brazil', 'British Indian Ocean Territory', 'British Virgin Islands', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burma', 'Burundi', 'Cambodia', 'Cameroon', 'Canada', 'Cape Verde', 'Cayman Islands', 'Central African Republic', 'Chad', 'Chile', 'China', 'Christmas Island', 'Clipperton Island', 'Cocos Islands', 'Colombia', 'Comoros', 'Congo Democratic Republic of the', 'Congo Republic of the', 'Cook Islands', 'Coral Sea Islands', 'Costa Rica', 'Cote dIvoire', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Dhekelia', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Ethiopia', 'Europa Island', 'Falkland Islands', 'Faroe Islands', 'Fiji', 'Finland', 'France', 'French Guiana', 'French Polynesia', 'French Southern and Antarctic Lands', 'Gabon', 'Gambia, The', 'Gaza Strip', 'Georgia', 'Germany', 'Ghana', 'Gibraltar', 'Glorioso Islands', 'Greece', 'Greenland', 'Grenada', 'Guadeloupe', 'Guam', 'Guatemala', 'Guernsey', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Heard Island and McDonald Islands', 'Holy See', 'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iraq', 'Ireland', 'Isle of Man', 'Israel', 'Italy', 'Jamaica', 'Jan Mayen', 'Japan', 'Jersey', 'Jordan', 'Juan de Nova Island', 'Kazakhstan', 'Kenya', 'Kiribati', 'Korea, South', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macau', 'Macedonia', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Martinique', 'Mauritania', 'Mauritius', 'Mayotte', 'Mexico', 'Micronesia, Federated States of', 'Moldova', 'Monaco', 'Mongolia', 'Montserrat', 'Morocco', 'Mozambique', 'Namibia', 'Nauru', 'Navassa Island', 'Nepal', 'Netherlands', 'Netherlands Antilles', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'Niue', 'Norfolk Island', 'Northern Mariana Islands', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Panama', 'Papua New Guinea', 'Paracel Islands', 'Paraguay', 'Peru', 'Philippines', 'Pitcairn Islands', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Reunion', 'Romania', 'Russia', 'Rwanda', 'Saint Helena', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Pierre and Miquelon', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia and Montenegro', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Georgia and the South Sandwich Islands', 'Spain', 'Spratly Islands', 'Sri Lanka', 'Sudan', 'Suriname', 'Svalbard', 'Swaziland', 'Sweden', 'Switzerland', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tokelau', 'Tonga', 'Trinidad and Tobago', 'Tromelin Island', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Venezuela', 'Vietnam', 'Virgin Islands', 'Wake Island', 'Wallis and Futuna', 'West Bank', 'Western Sahara', 'Yemen', 'Zambia', 'Zimbabwe']
+            on_text:
+			    root.on_spinner_select_country(self.text)
+	    Label:
+            text: "Select Cause:"
+            size_hint: 0.15, 0.05
+            pos_hint: {"x":0.25, "top": 0.55}
+            font_size: 40
+        Spinner:
+			id: cause
+			text: "Choose Cause"
+			size_hint: .4, .05
+			pos_hint: {"x": 0.5, "top": 0.55}
+			values: ['Youth STEM', 'Girls who Code', 'Entrepreneurship', 'Veterans', 'Under Privileged Youth', 'Homeless', 'Environmental Conservation', 'Animal Rescue']
+			on_text:
+		        root.on_spinner_select_cause(self.text)
+		Label:
+            text: "Donation Amount:"
+            size_hint: 0.15, 0.05
+            pos_hint: {"x":0.25, "top": 0.45}
+            font_size: 40
+        Spinner:
+			id: percentage
+			text: "Choose"
+			size_hint: .4, .05
+			pos_hint: {"x": 0.5, "top": 0.45}
+			values: ['1%', '2%', '3%', '4%', '5%', '6%', '7%', '8%', '9%', '10%', '11%', '12%', '13%', '14%', '15%', '16%', '17%', '18%', '19%', '20%', '21%', '22%', '23%', '24%', '25%', '26%', '27%', '28%', '29%', '30%', '31%', '32%', '33%', '34%', '35%', '36%', '37%', '38%', '39%', '40%', '41%', '42%', '43%', '44%', '45%', '46%', '47%', '48%', '49%', '50%', '51%', '52%', '53%', '54%', '55%', '56%', '57%', '58%', '59%', '60%', '61%', '62%', '63%', '64%', '65%', '66%', '67%', '68%', '69%', '70%', '71%', '72%', '73%', '74%', '75%', '76%', '77%', '78%', '79%', '80%', '81%', '82%', '83%', '84%', '85%', '86%', '87%', '88%', '89%', '90%', '91%', '92%', '93%', '94%', '95%', '96%', '97%', '98%', '99%', '100%']
+			on_text:
+			    root.on_spinner_select_percentage(self.text)
+        Button:
+            text: "Donate"
+            size_hint: 0.4, 0.07
+            pos_hint: {"x":0.6, "top":0.07}
+            on_release: root.donation_details()
+        Button:
+            text: "Cancel"
+            size_hint: 0.4, 0.07
+            pos_hint: {"x":0, "top":0.07}
+            on_press: app.root.current = 'main'
+
+<CurrLoginWindow>:
+    name: "second"
+    NCTTabbedPanel:
+    	do_default_tab: False
+    	tab_width: self.parent.width / 3
+    	TabbedPanelItem:
+    		text:"Crypto Portfolio"
+    		FloatLayout:
+				Label:
+					text: "Choose Exchange: "
+					size_hint: 0.5, 0.05
+					pos_hint:{"x":0, "top":0.75}
+					font_size: 40
+				Spinner:
+					id: chooser
+					text: "Choose"
+					size_hint: .5, .05
+					pos_hint: {"x": .40, "top": .75}
+					values: ['_1btcxe', 'acx', 'adara', 'allcoin', 'anxpro', 'bcex', 'bequant', 'bibox', 'bigone', 'binance', 'binanceje', 'binance.us', 'bit2c', 'bitbank', 'bitbay', 'bitfinex', 'bitfinex2', 'bitflyer', 'bitforex', 'bithumb', 'bitkk', 'bitlish', 'bitmart', 'bitmax', 'bitmex', 'bitso', 'bitstamp', 'bitstamp1', 'bittrex', 'bitz', 'bl3p', 'bleutrade', 'braziliex', 'btcalpha', 'btcbox', 'btcchina', 'btcmarkets', 'btctradeim', 'btctradeua', 'btcturk', 'buda', 'bytetrade', 'cex', 'chilebit', 'cobinhood', 'coinbase', 'coinbaseprime', 'coinbasepro', 'coincheck', 'coinegg', 'coinex', 'coinexchange', 'coinfalcon', 'coinfloor', 'coingi', 'coinmarketcap', 'coinmate', 'coinone', 'coinspot', 'cointiger', 'coolcoin', 'coss', 'crex24', 'deribit', 'digifinex', 'dsx', 'dx', 'exmo', 'exx', 'fcoin', 'fcoinjp', 'flowbtc', 'foxbit', 'ftx', 'fybse', 'gateio', 'gemini', 'hitbtc', 'hitbtc2', 'huobipro', 'huobiru', 'ice3x', 'idex', 'independentreserve', 'indodax', 'itbit', 'kkex', 'kraken', 'kucoin', 'kuna', 'lakebtc', 'latoken', 'lbank', 'liquid', 'livecoin', 'luno', 'lykke', 'mandala', 'mercado', 'mixcoins', 'negociecoins', 'oceanex', 'okcoincny', 'okcoinusd', 'okex', 'okex3', 'paymium', 'poloniex', 'rightbtc', 'southxchange', 'stronghold', 'surbitcoin', 'theocean', 'therock', 'tidebit', 'tidex', 'upbit', 'vaultoro', 'vbtc', 'virwox', 'whitebit', 'xbtce', 'yobit', 'zaif', 'zb']
+					on_text:
+						root.on_spinner_select(self.text)
+    			Label:
+    			    text:"Enter API Key:"
+    				size_hint:0.5, 0.05
+    				pos_hint:{"x":0, "top":0.65}
+    				font_size: 40
+    			TextInput:
+    				id: CAPIKey
+    				multiline: False
+    				size_hint: 0.5, 0.05
+    				pos_hint:{"x":0.40, "top":0.65}
+					write_tab: False
+    			Label:
+    			    text:"Enter Secret Key:"
+    				size_hint:0.5, 0.05
+    				pos_hint:{"x":0, "top":0.55}
+    				font_size: 40
+    			TextInput:
+    				id: CSecretKey
+    				multiline: False
+    				size_hint: 0.5, 0.05
+    				pos_hint:{"x":0.40, "top":0.55}
+					write_tab: False
+
+    			Button:
+    				text: "Submit"
+        			size_hint:0.30, 0.05
+        			pos_hint:{"x":0.35, "top":0.45}
+        			on_release: root.loginCrypto()
+    				# on_release: app.root.current = "cryptoPort"
+            			# root.manager.transition.direction = "left"
+    	TabbedPanelItem:
+    		text: "Forex Portfolio"
+    		FloatLayout:
+    			Label:
+    			    text:"Username:"
+    				size_hint:0.5, 0.05
+    				pos_hint:{"x":0, "top":0.75}
+    				font_size: 40
+    			TextInput:
+    				id: funame
+    				multiline: False
+    				size_hint: 0.5, 0.05
+    				pos_hint:{"x":0.40, "top":0.75}
+					write_tab: False
+    			Label:
+    			    text:"Password:"
+    				size_hint:0.5, 0.05
+    				pos_hint:{"x":0, "top":0.65}
+    				font_size: 40
+    			TextInput:
+    				id: fpassw
+    				multiline: False
+    				size_hint: 0.5, 0.05
+    				pos_hint:{"x":0.40, "top":0.65}
+					write_tab: False
+				Label:
+					text:"Appkey:"
+    				size_hint:0.5, 0.05
+    				pos_hint:{"x":0, "top":0.55}
+    				font_size: 40
+				TextInput:
+					id: appkey
+    				multiline: False
+    				size_hint: 0.5, 0.05
+    				pos_hint:{"x":0.40, "top":0.55}
+					write_tab: False
+                Button:
+                    text: "Submit"
+                    size_hint:0.3, 0.05
+                    pos_hint:{"x":0.35, "top":0.45}
+                    on_release: root.loginForex()
+                        # app.root.current = "forexPort"
+                        # root.manager.transition.direction = "left"
+    	TabbedPanelItem:
+    		text: "Stock exchange"
+    		FloatLayout:
+    			Label:
+    			    text:"Username:"
+    				size_hint:0.5, 0.05
+    				pos_hint:{"x":0, "top":0.75}
+    				font_size: 40
+    			TextInput:
+    				id: runame
+    				multiline: False
+    				size_hint: 0.5, 0.05
+    				pos_hint:{"x":0.40, "top":0.75}
+    			Label:
+    			    text:"Password:"
+    				size_hint:0.5, 0.05
+    				pos_hint:{"x":0, "top":0.65}
+    				font_size: 40
+    			TextInput:
+    				id: rpassw
+    				multiline: False
+    				size_hint: 0.5, 0.05
+    				pos_hint:{"x":0.40, "top":0.65}
+				Label:
+					text:"Choose Exchange: "
+					size_hint:0.5, 0.05
+					pos_hint:{"x":0, "top":0.55}
+					font_size: 40
+				Spinner:
+					id: exchange
+					text: "Exchange"
+					size_hint: .5, .05
+					pos_hint: {"x": .40, "top": .55}
+					values: ['Robinhood', 'Coming soon!']
+					on_text:
+						root.on_spinner_select_exchange(self.text)
+                Button:
+                    text: "Submit"
+                    size_hint:0.3, 0.05
+                    pos_hint:{"x":0.35, "top":0.45}
+                    on_release:
+						root.handle_login_stocks()
+                        # app.root.current = "robinPort"
+                        # root.manager.transition.direction = "left"
+
+	Button:
+        text: "Go Back"
+        size_hint:0.25,0.05
+        pos_hint:{"x":0, "top":0.05}
+        on_release:
+            app.root.current = "main"
+            root.manager.transition.direction = "right"
+
+<RobinMFAScreen>:
+	name: "tfa_robin"
+	FloatLayout:
+		Label:
+			text: "SMS Code:"
+			size_hint:0.5, 0.05
+			pos_hint:{"x":0, "top":0.55}
+			font_size: 40
+		TextInput:
+			id: sms_code
+			multiline: False
+			size_hint: 0.5, 0.05
+			pos_hint:{"x":0.40, "top":0.55}
+		Button:
+			text: "Submit"
+			size_hint:0.25, 0.05
+			pos_hint:{"x":0.55, "top":0.45}
+			on_release:
+				root.tfa_login()
+		Button:
+			text: "Cancel"
+			size_hint:0.25, 0.05
+			pos_hint:{"x":0, "top":0}
+			on_release:
+				app.root.current = 'second'
+
+<CryptoPortfolio>:
+    name: "cryptoPort"
+    NCTTabbedPanel1:
+    	do_default_tab: False
+    	tab_width: self.parent.width/2
+    	TabbedPanelItem:
+    		text:"Account Information"
+			FloatLayout:
+				Label:
+					text: "Currency"
+					size_hint:0.25,0.05
+					pos_hint:{"x":.1, "top":0.90}
+					font_size: 40
+				Label:
+					text: "Amount"
+					size_hint:0.25,0.05
+					pos_hint:{"x":.40, "top":0.90}
+					font_size: 40
+				Label:
+					text: "In USD"
+					size_hint:0.25,0.05
+					pos_hint:{"x":.7, "top":0.90}
+					font_size: 40
+				Label:
+					id: cryptoCurr0
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":0.1, "top":0.80}
+					font_size: 40
+				Label:
+					id: curr0Amount
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":.4, "top":0.80}
+					font_size: 40
+				Label:
+					id: curr0usd
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":.7, "top":0.80}
+					font_size: 40
+				Label:
+					id: cryptoCurr1
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":0.1, "top":0.70}
+					font_size: 40
+				Label:
+					id: curr1Amount
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":.40, "top":0.70}
+					font_size: 40
+				Label:
+					id: curr1usd
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":.70, "top":0.70}
+					font_size: 40
+				Label:
+					id: cryptoCurr2
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":0.1, "top":0.6}
+					font_size: 40
+				Label:
+					id: curr2Amount
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":.40, "top":0.6}
+					font_size: 40
+				Label:
+					id: curr2usd
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":.70, "top":0.6}
+					font_size: 40
+				Label:
+					id: cryptoCurr3
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":0.1, "top":0.5}
+					font_size: 40
+				Label:
+					id: curr3Amount
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":.4, "top":0.5}
+					font_size: 40
+				Label:
+					id: curr3usd
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":.7, "top":0.5}
+					font_size: 40
+				Label:
+					id: cryptoCurr4
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":0.1, "top":0.4}
+					font_size: 40
+				Label:
+					id: curr4Amount
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":.4, "top":0.4}
+					font_size: 40
+				Label:
+					id: curr4usd
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":.7, "top":0.4}
+					font_size: 40
+				Label:
+					id: cryptoCurr5
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":0.1, "top":0.3}
+					font_size: 40
+				Label:
+					id: curr5Amount
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":.4, "top":0.3}
+					font_size: 40
+				Label:
+					id: curr5usd
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":.7, "top":0.3}
+					font_size: 40
+				Widget:
+			        id: separator
+			        size_hint_y: None
+			        height: 6
+			        canvas:
+			            Rectangle:
+			                pos: 0, separator.center_y
+			                size: separator.width, 2
+				Label:
+					text: "Total"
+					size_hint:0.25,0.05
+					pos_hint:{"x":0.1, "top":0.2}
+					font_size: 40
+				Label:
+					id: TotalUSD
+					text: ""
+					size_hint:0.25,0.05
+					pos_hint:{"x":.7, "top":0.2}
+					font_size: 40
+
+		TabbedPanelItem:
+			text: "Crypto Portfolio"
+			FloatLayout:
+				Label:
+					text: "Enter currency pair "
+					size_hint:0.25,0.05
+					pos_hint: {"x":.2, "top":0.75}
+					font_size: 40
+				TextInput:
+					id: currencyPair
+					size_hint:0.3,0.05
+					pos_hint: {"x":.5, "top":0.75}
+					multiline: False
+					write_tab: False
+				Label:
+					text: 'Amount '
+					size_hint:0.25,0.05
+					pos_hint: {"x":.2, "top":0.67}
+					font_size: 40
+				TextInput:
+					id: Amount
+					size_hint:0.3,0.05
+					pos_hint: {"x":.5, "top":0.67}
+					multiline: False
+					write_tab: False
+				Button:
+					text: 'Sell'
+					size_hint:0.15,0.05
+					pos_hint: {"x":.5, "top":0.58}
+					on_release: root.sell()
+				Button:
+					text: "Buy"
+					size_hint: .15, .05
+					pos_hint: {"x":.65, "top": .58}
+					on_release: root.buy()
+
+				# # Limit
+				# Label:
+				# 	text: 'Limit'
+				# 	size_hint:0.15,0.1
+				# 	pos_hint: {"x":.45, "top":65}
+				# 	font_size: '50sp'
+				# Label:
+				# 	text: "Enter market ID to sell"
+				# 	size_hint:0.25,0.05
+				# 	pos_hint: {"x":.25, "top":0.55}
+				# 	font_size: 40
+				# TextInput:
+				# 	id: MarketIdLimit
+				# 	size_hint:0.3,0.05
+				# 	pos_hint: {"x":.5, "top":0.55}
+				# 	multiline: False
+				# 	write_tab: False
+				# Label:
+				# 	text: 'Amount to sell'
+				# 	size_hint:0.25,0.05
+				# 	pos_hint: {"x":.25, "top":0.48}
+				# 	font_size: 40
+				# TextInput:
+				# 	id: AmountLimit
+				# 	size_hint:0.3,0.05
+				# 	pos_hint: {"x":.5, "top":0.48}
+				# 	multiline: False
+				# 	write_tab: False
+				# Label:
+				# 	text: 'Price to sell'
+				# 	size_hint:0.25,0.05
+				# 	pos_hint: {"x":.25, "top":0.41}
+				# 	font_size: 40
+				# TextInput:
+				# 	id: PriceLimit
+				# 	size_hint:0.3,0.05
+				# 	pos_hint: {"x":.5, "top":0.41}
+				# 	multiline: False
+				# 	write_tab: False
+				# Button:
+				# 	text: 'Sell'
+				# 	size_hint:0.15,0.05
+				# 	pos_hint: {"x":.5, "top":0.35}
+				# 	on_release: root.sell_limit()
+				# Button:
+				# 	text: 'Buy'
+				# 	size_hint:0.15,0.05
+				# 	pos_hint: {"x":.65, "top":0.35}
+				# 	on_release: root.buy_limit()
+
+				Label:
+					text: "Change exchange "
+					size_hint:0.25,0.05
+					pos_hint:{"x":.2, "top":0.47}
+					font_size: 40
+				TextInput:
+					id: ExName
+					size_hint:0.3,0.05
+					pos_hint:{"x":.5, "top":0.47}
+					multiline: False
+					write_tab: False
+				Label:
+					text: "API key "
+					size_hint:0.25,0.05
+					pos_hint:{"x":.2, "top":0.39}
+					font_size: 40
+				TextInput:
+					id: newApiKey
+					size_hint:0.3,0.05
+					pos_hint:{"x":.5, "top":0.39}
+					multiline: False
+					write_tab: False
+				Label:
+					text: "Secret key "
+					size_hint:0.25,0.05
+					pos_hint:{"x":.2, "top":0.31}
+					font_size: 40
+				TextInput:
+					id: newSecretKey
+					size_hint:0.3,0.05
+					pos_hint:{"x":.5, "top":0.31}
+					multiline: False
+					write_tab: False
+				Button:
+					text: "OK"
+					size_hint:0.3,0.05
+					pos_hint:{"x":.5, "top":0.25}
+					on_release: root.change_crypto()
+			    Button:
+			        text: "Logout"
+			        size_hint:0.5,0.05
+			        pos_hint:{"x":0, "top":0.05}
+					background_normal: ''
+					background_color: 1, 0, 0, 1
+			        on_release: app.root.current = 'second'
+					# 	root.manager.transition.direction = 'left'
+			    # Button:
+			    #     text: "Free Balance"
+			    #     size_hint:0.5,0.05
+			    #     pos_hint:{"x":0.5, "top":0.05}
+			    #     on_release: root.account_balance()
+
+<ForexPortfolio>:
+	name: "forexPort"
+	NCTTabbedPanel1:
+		do_default_tab: False
+		tab_width: self.parent.width/2
+		TabbedPanelItem:
+			text: "Account Information"
+			FloatLayout:
+				Label:
+					text: "Cash: "
+					size_hint:0.25,0.05
+					pos_hint:{"x":.20, "top":0.80}
+					font_size: 40
+				Label:
+					id: ForexCash
+					text: ""
+					size_hint:0.30,0.05
+					pos_hint:{"x":.5, "top":0.80}
+					font_size: 40
+				Label:
+					text: "Net Equity: "
+					size_hint:0.25,0.05
+					pos_hint:{"x":.2, "top":0.70}
+					font_size: 40
+				Label:
+					id: ForexEquity
+					text: ""
+					size_hint:0.30,0.05
+					pos_hint:{"x":.5, "top":0.70}
+					font_size: 40
+				Label:
+					text: "Tradable Funds: "
+					size_hint:0.25,0.05
+					pos_hint:{"x":.2, "top":0.60}
+					font_size: 40
+				Label:
+					id: ForexTradable
+					text: ""
+					size_hint:0.30,0.05
+					pos_hint:{"x":.5, "top":0.60}
+					font_size: 40
+				Label:
+					text: "Margin: "
+					size_hint:0.25,0.05
+					pos_hint:{"x":.2, "top":0.50}
+					font_size: 40
+				Label:
+					id: ForexMargin
+					text: ""
+					size_hint:0.30,0.05
+					pos_hint:{"x":.5, "top":0.50}
+					font_size: 40
+				Label:
+					text: "Currency: "
+					size_hint:0.25,0.05
+					pos_hint:{"x":.2, "top":0.40}
+					font_size: 40
+				Label:
+					id: ForexCurrency
+					text: ""
+					size_hint:0.30,0.05
+					pos_hint:{"x":.5, "top":0.40}
+					font_size: 40
+		TabbedPanelItem:
+			text: "Forex Portfolio"
+			FloatLayout:
+				Button:
+					text: "Logout"
+					size_hint: .5, .15
+					pos_hint: {"x": 0, "top": .15}
+					background_normal: ''
+					background_color: 1, 0, 0, 1
+					on_release: root.logoutForex()
+					on_release: app.root.current = 'second'
+				Button:
+					text: "User Info"
+					size_hint: .5, .15
+					pos_hint: {"x": .5, "top": .15}
+					on_release:
+						root.user_info_Forex()
+				Button:
+					text: "Get Margins"
+					size_hint: .5, .15
+					pos_hint: {"x": 0, "top": .30}
+					on_release:
+						root.get_margins_Forex()
+				Button:
+					text: "Market"
+					size_hint: .5, .15
+					pos_hint: {"x": .5, "top": .3}
+				Button:
+					text: "Buy"
+					size_hint: .5, .15
+					pos_hint: {"x": 0, "top": .45}
+					on_release: Factory.ForexBuyWindow().open()
+				Button:
+					text: "Sell"
+					size_hint: .5, .15
+					pos_hint: {"x": .5, "top": .45}
+					on_release: Factory.ForexSellWindow().open()
+
+
+<ForexBuyWindow@Popup>:
+    name: "forexBuy"
+    marketname : marketname
+    quantity : quantity
+    auto_dismiss: False
+    title: "Buy Trade"
+    bold: True
+    FloatLayout:
+        cols:1
+        FloatLayout:
+            Label:
+                text: "Market Name:"
+                size_hint: 0.15, 0.05
+                pos_hint: {"x":1, "top": 1.1}
+                font_size: 40
+            TextInput:
+    			id: marketname
+    			multiline: False
+    			font_size: 12
+    			size_hint: 0.55, 0.075
+    			pos_hint:{"x":1.25, "top":1.1}
+				write_tab: False
+    	    Label:
+                text: "Quantity:"
+                size_hint: 0.15, 0.05
+                pos_hint: {"x":1, "top": .95}
+                font_size: 40
+            TextInput:
+    			id: quantity
+    			multiline: False
+    			font_size: 12
+    			size_hint: 0.55, 0.075
+    			pos_hint:{"x":1.25, "top":.95}
+				write_tab: False
+            Button:
+                text: "Buy"
+                size_hint: 0.55, 0.1
+                pos_hint: {"x":1.10, "top":0.65}
+                on_release:root.buy_order_Forex()
+            Button:
+                text: "Cancel"
+                size_hint: 0.55, 0.1
+                pos_hint: {"x":1.10, "top":0.50}
+                on_press:
+                    root.dismiss()
+
+<ForexSellWindow@Popup>:
+    name: "forexSell"
+    marketname : marketname
+    quantity : quantity
+    auto_dismiss: False
+    title: "Sell Trade"
+    bold: True
+    FloatLayout:
+        cols:1
+        FloatLayout:
+            Label:
+                text: "Exchange Name:"
+                size_hint: 0.15, 0.05
+                pos_hint: {"x":1, "top": 1.1}
+                font_size: 40
+            TextInput:
+    			id: marketname
+    			multiline: False
+    			font_size: 12
+    			size_hint: 0.55, 0.075
+    			pos_hint:{"x":1.25, "top":1.1}
+				write_tab: False
+    	    Label:
+                text: "Quantity:"
+                size_hint: 0.15, 0.05
+                pos_hint: {"x":1, "top": .95}
+                font_size: 40
+            TextInput:
+    			id: quantity
+    			multiline: False
+    			font_size: 12
+    			size_hint: 0.55, 0.075
+    			pos_hint:{"x":1.25, "top":.95}
+				write_tab: False
+            Button:
+                text: "Sell"
+                size_hint: 0.55, 0.1
+                pos_hint: {"x":1.10, "top":0.65}
+                on_release:root.sell_order_Forex()
+            Button:
+                text: "Cancel"
+                size_hint: 0.55, 0.1
+                pos_hint: {"x":1.10, "top":0.50}
+                on_press:
+                    root.dismiss()
+
+
+
+<RobinhoodPortfolio>:
+	name: "robinPort"
+	NCTTabbedPanel1:
+		do_default_tab: False
+		tab_width: self.parent.width
+		# TabbedPanelItem:
+		# 	text: "Stock Market"
+		# 	MyGrid:
+		# 		cols: 9
+		# 		spacing: '15dp'
+		# 		size_hint_y: .6
+		TabbedPanelItem:
+			text: "Stock Exchange"
+			FloatLayout:
+				Button:
+					text: "Logout"
+					size_hint: .5, .05
+					pos_hint: {"x": 0, "top": .05}
+					background_normal: ''
+					background_color: 1, 0, 0, 1
+					on_release: root.logoutRobin()
+					on_release: app.root.current = "second"
+				Button:
+					text: "Investment Prof"
+					size_hint: .5, .05
+					pos_hint: {"x": .5, "top": .05}
+					on_release: root.get_investment_profile()
+				# Button:
+				# 	text: "Stock Quote"
+				# 	size_hint: .3, .05
+				# 	pos_hint: {"x": .5, "top": .18}
+				# 	on_release: root.get_stock_quotes()
+
+
+				# BUY/SELL
+				Label:
+					text: "Stock Ticker"
+					size_hint: .25, .05
+					pos_hint: {"x": .25, "top": .55}
+					font_size: 40
+				TextInput:
+					id: stockname
+					size_hint: .3, .05
+					pos_hint: {"x": .5, "top": .55}
+					multiline: False
+					write_tab: False
+				Label:
+					text: "Quantity"
+					size_hint: .25, .05
+					pos_hint: {"x": .25, "top": .50}
+					font_size: 40
+				TextInput:
+					id: quantity
+					size_hint: .3, .05
+					pos_hint: {"x": .5, "top": .50}
+					multiline: False
+					write_tab: False
+				Button:
+					text: "Buy"
+					size_hint: .15, .06
+					pos_hint: {"x": .5, "top": .43}
+					on_release: root.buy_order()
+				Button:
+					text: "Sell"
+					size_hint: .15, .06
+					pos_hint: {"x": .65, "top": .43}
+					on_release: root.sell_order()
+
+<CoinRecord>:
+    size_hint_y: None
+    height: '30dp'
+    width: '100dp'
+    canvas.before:
+        Color:
+            rgb: 0.2, 0.2, 0.2
+        Rectangle:
+            pos: self.pos
+            size: self.size
+<TableHeader>
+    size_hint_y: None
+    height: '30dp'
+    width: '100dp'
+    canvas.before:
+        Color:
+            rgb: 0.5, 0.5, 0.5
+        Rectangle:
+            pos: self.pos
+            size: self.size
