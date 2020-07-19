@@ -1,0 +1,293 @@
+#:import Factory kivy.factory.Factory
+WindowManager:
+	MainWindow:
+    SecondWindow:
+    CryptoPorfolio:
+
+<MainWindow>:
+    name: "main"
+    email: email
+    password: passw
+    FloatLayout:
+    	Label:
+    		text: "Welcome to Next Capital Tech Software"
+            family_name: "Arial"
+            bold: True
+    		font_size: 20
+    		size_hint:0.20, 0.15
+    		pos_hint:{"x": 0.40, "top":0.78}
+    	Image:
+    		source:'nct_new.png'
+    		size_hint:0.22, 0.22
+    		pos_hint:{"x":0.40, "top":1.00}
+    	NCTTabbedPanel2:
+    	    do_default_tab: False
+    	    tab_width: self.parent.width / 2
+    	    pos_hint:{"x": 0, "top":0.65}
+            
+    	    TabbedPanelItem:
+    		    text:"My Portfolio"
+                
+    		    FloatLayout:
+                    
+    			    Label:
+    			        text:"User name:"
+    				    size_hint:0.5, 0.05
+    				    font_size: 15
+                        pos_hint:{"x":0, "top":0.85}
+    			    TextInput:
+    				    id: email
+    				    multiline: False
+    				    size_hint: 0.25, 0.05
+    				    pos_hint:{"x":0.40, "top":0.85}
+    			    Label:
+    			        text:"Password:"
+    				    size_hint:0.5, 0.05
+    				    pos_hint:{"x":0, "top":0.75}
+    				    font_size: 15
+    			    TextInput:
+    			        password: True
+    				    id: passw
+    				    multiline: False
+    				    size_hint: 0.25, 0.05
+    				    pos_hint:{"x":0.40, "top":0.75}
+    			    Button:
+    				    text: "Login"
+        			    size_hint:0.25, 0.05
+        			    pos_hint:{"x":0.40, "top":0.65}
+        			    on_release:
+        			        app.root.current = "second"
+            			    root.manager.transition.direction = "left"
+            	    Button:
+            	        text: "Don't have an account? SignUp"
+            	        pos_hint:{"x":0.40, "top":0.55}
+            	        size_hint:0.25, 0.05
+            	        on_release: Factory.CreateAccountWindow().open()
+    	    TabbedPanelItem:
+    		    text: "Finanace Home"
+
+                ScrollView:
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    MyGrid1:
+                        cols: 6
+                        spacing: '1dp'
+<CreateAccountWindow@Popup>:
+    uname : uname
+    email: email
+    passw: passw
+    cpassw: cpassw
+    auto_dismiss: False
+    size_hint: 0.4,0.75
+    title: "Create an account"
+    bold: True
+    FloatLayout:
+        cols:1
+        FloatLayout:
+            Label:
+                text: "Name"
+                size_hint: 0.15, 0.07
+                pos_hint: {"x":1, "top": 1.25}
+                font_size: 15
+            TextInput:
+    			id: uname
+    			multiline: False
+    			font_size: 12
+    			size_hint: 0.35, 0.1
+    			pos_hint:{"x":1.25, "top":1.25}
+    	    Label:
+                text: "Email Id"
+                size_hint: 0.15, 0.07
+                pos_hint: {"x":1, "top": 1.10}
+                font_size: 15
+            TextInput:
+    			id: email
+    			text: "email"
+    			multiline: False
+    			font_size: 12
+    			size_hint: 0.35, 0.1
+    			pos_hint:{"x":1.25, "top":1.10}
+            Label:
+                text: "Password"
+                size_hint: 0.15, 0.07
+                pos_hint: {"x":1, "top":0.95}
+                font_size: 15
+            TextInput:
+                password: True
+    			id: passw
+    			font_size: 12
+    			multiline: False
+    			size_hint: 0.35, 0.1
+    			pos_hint:{"x":1.25, "top":0.95}
+            Label:
+                text: "Confirm Password"
+                size_hint: 0.15, 0.08
+                pos_hint: {"x":1, "top":.70}
+                font_size: 15
+            TextInput:
+                font_size: 12
+                password: True
+    			id: cpassw
+    			multiline: False
+    			size_hint: 0.35, 0.1
+    			pos_hint:{"x":1.25, "top":.70}
+            Button:
+                text: "SignUp"
+                size_hint: 0.35, 0.1
+                pos_hint: {"x":1.25, "top":0.55}
+                on_release:
+                    root.submit()
+                    root.dismiss()
+<SecondWindow>:
+    name: "second"
+    NCTTabbedPanel:
+    	do_default_tab: False
+    	tab_width: self.parent.width / 3
+    	TabbedPanelItem:
+    		text:"Crypto Portfolio"
+    		FloatLayout:
+    			Label:
+    			    text:"Enter API Key:"
+    				size_hint:0.5, 0.05
+    				pos_hint:{"x":0, "top":0.75}
+    				font_size: 15
+    			TextInput:
+    				id: CAPIKey
+    				multiline: False
+    				size_hint: 0.5, 0.05
+    				pos_hint:{"x":0.40, "top":0.75}
+    			Label:
+    			    text:"Enter Secret Key:"
+    				size_hint:0.5, 0.05
+    				pos_hint:{"x":0, "top":0.65}
+    				font_size: 15
+    			TextInput:
+    				id: CSecretKey
+    				multiline: False
+    				size_hint: 0.5, 0.05
+    				pos_hint:{"x":0.40, "top":0.65}
+    			Button:
+    				text: "Submit"
+        			size_hint:0.25, 0.05
+        			pos_hint:{"x":0.55, "top":0.55}
+        			on_release:
+    					app.root.current = "third"
+            			root.manager.transition.direction = "left"
+
+    	TabbedPanelItem:
+    		text: "Forex Portfolio"
+    		FloatLayout:
+    			Label:
+    			    text:"Username:"
+    				size_hint:0.5, 0.05
+    				pos_hint:{"x":0, "top":0.75}
+    				font_size: 15
+    			TextInput:
+    				id: funame
+    				multiline: False
+    				size_hint: 0.5, 0.05
+    				pos_hint:{"x":0.40, "top":0.75}
+    			Label:
+    			    text:"Password:"
+    				size_hint:0.5, 0.05
+    				pos_hint:{"x":0, "top":0.65}
+    				font_size: 15
+    			TextInput:
+    				id: fpassw
+    				multiline: False
+    				size_hint: 0.5, 0.05
+    				pos_hint:{"x":0.40, "top":0.65}
+                Button:
+                    text: "Submit"
+                    size_hint:0.25, 0.05
+                    pos_hint:{"x":0.55, "top":0.55}
+                    on_release:
+                        app.root.current = "third"
+                        root.manager.transition.direction = "left"
+    	TabbedPanelItem:
+    		text: "RobinHood Portfolio"
+    		FloatLayout:
+    			Label:
+    			    text:"Username:"
+    				size_hint:0.5, 0.05
+    				pos_hint:{"x":0, "top":0.75}
+    				font_size: 15
+    			TextInput:
+    				id: runame
+    				multiline: False
+    				size_hint: 0.5, 0.05
+    				pos_hint:{"x":0.40, "top":0.75}
+    			Label:
+    			    text:"Password:"
+    				size_hint:0.5, 0.05
+    				pos_hint:{"x":0, "top":0.65}
+    				font_size: 15
+    			TextInput:
+    				id: rpassw
+    				multiline: False
+    				size_hint: 0.5, 0.05
+    				pos_hint:{"x":0.40, "top":0.65}
+                Button:
+                    text: "Submit"
+                    size_hint:0.25, 0.05
+                    pos_hint:{"x":0.55, "top":0.55}
+                    on_release:
+                        app.root.current = "third"
+                        root.manager.transition.direction = "left"
+
+	Button:
+        text: "Go Back"
+        size_hint:0.25,0.05
+        pos_hint:{"x":0, "top":0.05}
+        on_release:
+            app.root.current = "main"
+            root.manager.transition.direction = "right"
+
+<CryptoPorfolio>:
+    name: "third"
+    NCTTabbedPanel1:
+    	do_default_tab: False
+    	tab_width: self.parent.width
+    	TabbedPanelItem:
+    		text:"Crypto Portfolio"
+    		MyGrid:
+            	cols: 9
+            	spacing: '1dp'
+            	size_hint_y: None
+    Button:
+        text: "Go Back"
+        size_hint:0.5,0.05
+        pos_hint:{"x":0, "top":0.05}
+        on_release:
+            app.root.current = "second"
+            root.manager.transition.direction = "right"
+    Button:
+        text: "Update"
+        size_hint:0.5,0.05
+        pos_hint:{"x":0.5, "top":0.05}
+        on_release:
+            app.root.current = "third"
+            root.manager.transition.direction = "left"
+
+
+
+<CoinRecord>:
+    size_hint_y: None
+    height: '30dp'
+    width: '100dp'
+    canvas.before:
+        Color:
+            rgb: 0.2, 0.2, 0.2
+        Rectangle:
+            pos: self.pos
+            size: self.size
+<TableHeader>
+    size_hint_y: None
+    height: '30dp'
+    width: '100dp'
+    canvas.before:
+        Color:
+            rgb: 0.5, 0.5, 0.5
+        Rectangle:
+            pos: self.pos
+            size: self.size
