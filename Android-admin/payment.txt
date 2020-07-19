@@ -1,0 +1,1 @@
+{"sq_id": "qjsQ5hzq9tv0DzUMoAXNXFmCoyJZY", "txn_id": "", "paid": true}

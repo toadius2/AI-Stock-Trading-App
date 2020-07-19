@@ -1,0 +1,2 @@
+2 exchanges - building gateway between exchange and particle commands
+  Use crypto to buy stock - path through systems to buy stock using that currency

@@ -1,0 +1,8 @@
+Done:
+  binance,
+  BKEX,
+  Bilaxy - trades unsupporteds
+
+Not done:
+  MXC - doesn't work but done,
+  
