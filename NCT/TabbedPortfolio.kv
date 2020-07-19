@@ -1,0 +1,59 @@
+<NCTTabbedPannel>:
+    do_default_tab: False
+    tab_width: 200
+
+    TabbedPanelItem:
+        text: 'Crypto Portfolio'
+
+        GridLayout:
+            cols: 1
+
+            MyGrid:
+                cols: 9
+                spacing: '1dp'
+                size_hint_y: None
+
+
+    TabbedPanelItem:
+        text: 'Forex Portfolio'
+        BoxLayout:
+            Label:
+                text: 'Forex Portfolio content area'
+
+
+    TabbedPanelItem:
+        text: 'Full Portfolio'
+        BoxLayout:
+            Label:
+                text: 'Full Portfolio content area'
+
+    TabbedPanelItem:
+        text: 'NYSE Portfolio'
+        BoxLayout:
+            Label:
+                text: 'NYSE Portfolio content area'
+
+<CoinRecord>:
+    size_hint_y: None
+    height: '30dp'
+    width: '100dp'
+
+    canvas.before:
+        Color:
+            rgb: 0.2, 0.2, 0.2
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<TableHeader>
+    size_hint_y: None
+    height: '30dp'
+    width: '100dp'
+
+    canvas.before:
+        Color:
+            rgb: 0.5, 0.5, 0.5
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
