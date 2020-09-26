@@ -10,7 +10,7 @@ The program starts by running the file NCT_gui.py from NCT folder.
 6. MongoDB database is used for storing login information and user's previous portfolio account balances.
 
 
-To login to all three portfolios the Username/Password of Mr. Nelson are required.
+To login to all three portfolios Username/Password are required
 
 AI Hardware Access Key:
 1. This button is given for enabling users to get Buy/Sell signals from the Software on the Server and also to perform actual Buy/Sell orders on behalf of the user.
